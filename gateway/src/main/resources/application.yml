@@ -11,13 +11,15 @@ spring:
 
 debug: true
 
+hystrix.command.default.execution.timeout.enabled: false
+
 zuul:
   #this sets sensitiveHeaders to empty list so cookies and auth headers are passed through both ways
   sensitiveHeaders:
   routes:
     ui:
       path: /ginas/app/beta/**
-      url: http://localhost:8082
+      url: https://ase-gsrs-poc-uks-frontend.azurewebsites.net
       serviceId: frontend
       stripPrefix: false
 
@@ -65,7 +67,7 @@ zuul:
     #fallback anything else goes to substances
     legacy:
       path: /**
-      url: http://localhost:8080
+      url: https://ase-gsrs-poc-uks-substances.azurewebsites.net
       serviceId: substances
   ignored-patterns:
       - "/actuator/health"
@@ -74,7 +76,7 @@ ribbon:
   eureka:
     enabled: false
 
-server.port: 8081
+server.port: 443
 #management.endpoints.web.exposure.include: *
 management.endpoints.web.exposure.include: 'routes,filters'
 
@@ -83,8 +85,8 @@ logging:
     org.springframework.cloud.gateway: DEBUG
     reactor.netty.http.client: DEBUG
 
-spring.servlet.multipart.max-file-size:    100MB
-spring.servlet.multipart.max-request-size: 100MB
+spring.servlet.multipart.max-file-size: 500MB
+spring.servlet.multipart.max-request-size: 500MB
 
 eureka.client.enabled: false
 #Adding high timeout so that GSRS won't time out waiting for response from server.
@@ -98,7 +100,7 @@ ix:
     usernameheader: test-username
 
 # Make sure microservices are given enoough time to perform tasks. 
-zuul.host.socket-timeout-millis: 300000 
+zuul.host.socket-timeout-millis: 600000 
 
 #Keeps + encoded characters encoded as +
 zuul.forceOriginalQueryStringEncoding: true
