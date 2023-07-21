@@ -1,6 +1,7 @@
 HELP.md
 target/
 ginas.ix/
+ginas-ix/
 
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/

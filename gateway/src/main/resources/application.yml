@@ -63,6 +63,22 @@ zuul:
     #END applications section
     #############################
 
+    #############################
+    #START impurities section
+    ############################
+    impurities_core:
+      path: /api/v1/impurities/**
+      url: http://ase-gsrs-poc-uks-impurities.azurewebsites.net/api/v1/impurities
+      serviceId: impurities_core
+
+    impurities_core_alt:
+      path: /api/v1/impurities(**)/**
+      url: http://ase-gsrs-poc-uks-impurities.azurewebsites.net/api/v1/impurities
+      serviceId: impurities_core
+
+    #############################
+    #END impurities section
+    #############################
 
     #fallback anything else goes to substances
     legacy:
